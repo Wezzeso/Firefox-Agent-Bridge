@@ -1,0 +1,21 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><title>Bridge integration fixture</title>
+<style>body{font:16px system-ui;padding:32px;max-width:850px}label{display:block;margin:12px 0}button,input,select{padding:8px}#cover{position:fixed;inset:0;background:#777;z-index:999;display:none}#low{margin-top:1500px}</style>
+<h1>Проверка Firefox Agent Bridge</h1>
+<form id="form"><label>Имя <input id="name" placeholder="Ваше имя"></label>
+<label>Пароль <input id="password" type="password" value="never-return-this"></label>
+<label>Страна <select id="country"><option value="kz">Казахстан</option><option value="fr">Франция</option></select></label>
+<label>Согласен <input id="agree" type="checkbox"></label>
+<button id="save">Сохранить</button></form>
+<p id="result">Ещё не сохранено</p>
+<button id="change" onclick="this.textContent='Изменено'">Сменить текст</button>
+<button id="show-cover" onclick="document.getElementById('cover').style.display='block'">Перекрыть</button>
+<button id="disable" disabled>Отключён</button>
+<div id="shadow"></div><iframe id="child" title="Проверка iframe"></iframe>
+<p id="low">Нижняя часть</p><div id="cover" onclick="this.style.display='none'">Перекрытие — нажмите, чтобы закрыть</div>
+<script>
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('result').textContent='Сохранено: '+document.getElementById('name').value+' / '+document.getElementById('country').value+' / '+document.getElementById('agree').checked});
+document.getElementById('name').addEventListener('input',e=>{document.body.dataset.inputEvent=e.target.value});
+document.getElementById('shadow').attachShadow({mode:'open'}).innerHTML='<button id="shadow-button">Shadow action</button>';
+document.getElementById('shadow').shadowRoot.querySelector('button').onclick=()=>{document.getElementById('result').textContent='Shadow clicked'};
+document.getElementById('child').src='http://localhost:'+location.port+'/frame.html';
+</script></html>

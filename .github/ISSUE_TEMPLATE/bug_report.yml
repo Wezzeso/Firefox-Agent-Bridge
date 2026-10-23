@@ -1,0 +1,21 @@
+name: Bug report / Ошибка
+description: Report an installation or browser-control problem
+body:
+  - type: input
+    id: platform
+    attributes:
+      label: OS and Firefox version
+      placeholder: Ubuntu 24.04, Firefox 158, standard Mozilla build
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and expected result
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: firefox-agent doctor output
+      description: Remove private paths or information before submitting. Never include tokens, passwords or browser profiles.

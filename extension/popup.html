@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="popup.css"><title>Firefox Agent Bridge</title></head>
+<body>
+  <header><img src="icons/bridge.svg" width="40" height="40" alt=""><div><h1>Firefox Agent Bridge</h1><p>Локальное управление из Codex</p></div></header>
+  <main>
+    <div class="status"><span id="dot"></span><strong id="connection">Подключение…</strong></div>
+    <p id="error" role="alert" hidden></p>
+    <section><span class="label">ТЕКУЩАЯ ВКЛАДКА</span><p id="tab">…</p><p id="permission"></p>
+    <button id="grant">Разрешить управление вкладкой</button><button id="revoke" class="secondary" hidden>Отключить эту вкладку</button></section>
+    <p class="hint">Разрешение действует для этой вкладки и вкладок, открытых из неё, до остановки или перезапуска расширения. Агент сможет читать страницу и выполнять действия на ней.</p>
+    <button id="stop" class="danger">Остановить всё <kbd>Alt ⇧ X</kbd></button>
+    <div class="footer"><span id="count">Вкладок: 0</span><button id="reconnect" class="link">Переподключить мост</button></div>
+    <details><summary>Последние действия</summary><ul id="audit"></ul></details>
+  </main><script src="popup.js"></script>
+</body></html>

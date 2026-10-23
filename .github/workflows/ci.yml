@@ -1,0 +1,50 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    name: Installer and protocol / ${{ matrix.os }} / Python ${{ matrix.python }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.9'
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: macos-latest
+            python: '3.12'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: sh -n install.sh
+      - run: node --check extension/background.js && node --check extension/content.js && node --check extension/popup.js
+      - run: python scripts/build.py
+  browser:
+    name: Fresh one-command install / real Firefox
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Install standard Firefox from Mozilla
+        run: |
+          curl --fail --location --retry 3 'https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US' --output /tmp/firefox.tar.xz
+          mkdir -p "$RUNNER_TEMP/firefox-bin"
+          tar -xf /tmp/firefox.tar.xz -C "$RUNNER_TEMP/firefox-bin"
+          echo "FIREFOX_BINARY=$RUNNER_TEMP/firefox-bin/firefox/firefox" >> "$GITHUB_ENV"
+      - name: Install, launch and exercise the browser
+        env:
+          FIREFOX_AGENT_LIVE_TEST: '1'
+        run: |
+          python scripts/build.py
+          FIREFOX_AGENT_RELEASE_ARCHIVE="$PWD/dist/firefox-agent-bridge-$(cat VERSION).tar.gz" python -m unittest discover -s tests -p test_live_install.py -v

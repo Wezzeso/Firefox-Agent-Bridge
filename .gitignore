@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+profile/
+runtime/
+releases/
+current
+installation.json
+bridge/launch-host.sh
+*.log
+.DS_Store
+INSTALLED.txt
+TEST_RESULTS.txt
+.env
+.env.*
