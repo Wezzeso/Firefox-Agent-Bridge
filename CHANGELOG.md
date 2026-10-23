@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+- Normalize macOS temporary paths in installer regression tests.
+- Require installer checks on both Linux and macOS before publishing a release.
+- Keep live release verification aligned with the packaged version.
+
 ## 1.1.0
 
 - One-command bootstrap; installs the native bridge, Codex MCP configuration and application launcher.

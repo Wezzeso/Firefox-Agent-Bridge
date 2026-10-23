@@ -2,7 +2,7 @@
 # One-command bootstrap. Source and runtime need only Python's standard library.
 set -eu
 REPOSITORY="Wezzeso/Firefox-Agent-Bridge"
-REF="v1.1.0"
+REF="v1.1.1"
 case "$(uname -s)" in Linux|Darwin) ;; *) echo "Requires Linux or macOS. Windows is not supported yet." >&2; exit 1;; esac
 if command -v python3 >/dev/null 2>&1; then
   PYTHON=python3

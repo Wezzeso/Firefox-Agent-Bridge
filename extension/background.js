@@ -66,7 +66,7 @@ async function content(tabId, frameId, action, params, valid) {
 
 async function dispatch(method, p, valid) {
   valid();
-  if (method === "bridge.status") return { connected, controlledTabs: granted.size, version: "1.1.0" };
+  if (method === "bridge.status") return { connected, controlledTabs: granted.size, version: "1.1.1" };
   if (method === "bridge.stop") return stopAll();
   if (method === "tabs.list") {
     const tabs = await browser.tabs.query({});
@@ -198,7 +198,7 @@ function connect() {
     retryTimer = setTimeout(connect, reconnectDelay);
     reconnectDelay = Math.min(30000, reconnectDelay * 2);
   });
-  port.postMessage({ type: "hello", version: "1.1.0" });
+  port.postMessage({ type: "hello", version: "1.1.1" });
 }
 
 browser.runtime.onMessage.addListener(async (message, sender) => {

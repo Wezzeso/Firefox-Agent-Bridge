@@ -60,7 +60,7 @@ class LiveInstallTest(unittest.TestCase):
                     return json.loads(result.stdout)
                 status = command("status")
                 self.assertTrue(status["connected"])
-                self.assertEqual(status["version"], "1.1.0")
+                self.assertEqual(status["version"], (ROOT / "VERSION").read_text().strip())
                 source = command("tabs")[0]["tabId"]
                 tab = command("request", "tabs.create", json.dumps({"sourceTabId": source,
                     "url": f"http://127.0.0.1:{server.server_port}/fixture.html"}))["tabId"]

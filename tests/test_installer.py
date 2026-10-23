@@ -19,7 +19,7 @@ import installer_lib as lib
 class InstallerTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="firefox-agent-installer-")
-        self.base = Path(self.temp.name)
+        self.base = Path(self.temp.name).resolve()
         self.home = self.base / "user home"
         self.home.mkdir()
         self.prefix = self.home / "app 'quoted' $special"
