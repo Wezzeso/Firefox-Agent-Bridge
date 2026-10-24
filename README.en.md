@@ -1,3 +1,5 @@
+![Codex and Firefox connected by a bridge](docs/assets/banner.webp)
+
 # Firefox Agent Bridge
 
 Control Firefox from Codex through a local Native Messaging bridge and 20 MCP tools. One command installs the app, registers MCP, adds a launcher and opens a dedicated Firefox profile.

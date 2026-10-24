@@ -1,3 +1,5 @@
+![Codex и Firefox, соединённые мостом](docs/assets/banner.webp)
+
 # Firefox Agent Bridge
 
 Управляйте Firefox из Codex: страницы, кнопки, формы, вкладки, iframe и скриншоты. Одна команда устанавливает мост, подключает MCP и открывает отдельный Firefox с расширением.
